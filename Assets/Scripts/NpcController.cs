@@ -49,16 +49,16 @@ public class NpcController : MonoBehaviour
         target.GetComponent<CharackterController>().currentHealth -=  this.damage;
     }
 
+    //mal nachschauen: how Boids work
     public void OnTriggerEnter2D(Collider2D collision)
     {
 
         if(collision.CompareTag("NPC"))
         {
-            Debug.Log("1");
             if (collision.transform.position.y < gameObject.transform.position.y)
             {
-                Debug.Log("2");
                 rigidbody.AddForce(Vector2.up * 100f);
+
             }
             else
             {
