@@ -7,6 +7,7 @@ public class CharackterController : MonoBehaviour
     //Attributs
     public int maxHealth;
     public int currentHealth;
+    public int damage;
 
     // Movement
     private Rigidbody2D rigidbody;
@@ -30,10 +31,16 @@ public class CharackterController : MonoBehaviour
     public void Update()
     {
         Move();
+        InitPlayer();
+    }
+
+    public void InitPlayer()
+    {
+        currentHealth = maxHealth;
     }
 
     private void Move()
-    {
+    { 
         movementDirection.x = Input.GetAxisRaw("Horizontal");
         movementDirection.y = Input.GetAxisRaw("Vertical");
 
@@ -44,12 +51,16 @@ public class CharackterController : MonoBehaviour
         animator.SetBool(isMoving, movementDirection != Vector2.zero);
 
         // Flip Sprite Depending On Direction
-        renderer.flipX = movementDirection.x switch
+        if (Input.GetAxisRaw("Horizontal") > 0)
         {
-            < 0 => false,
-            > 0 => true,
-            _ => renderer.flipX
-        };
+            //rechts
+            transform.rotation = Quaternion.Euler(0f, -180f, 0f);
+        }
+        else if (Input.GetAxisRaw("Horizontal") < 0)
+        {
+            //links
+            transform.rotation = Quaternion.Euler(0f, 0, 0f);
+        }
     }
 
     public void FixedUpdate()

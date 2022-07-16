@@ -7,15 +7,21 @@ public class NpcController : MonoBehaviour
     public NPC npc;
     public SpriteRenderer sprite;
 
+    public Animator animator;
+
     public new Rigidbody2D rigidbody;
 
     public GameObject target;
     private Vector2 movementDirection;
 
-    public int currentHealth;
+    private int currentHealth;
     public int maxHealth;
     public int damage;
     public int level;
+
+    public Transform enemyGFX;
+
+    
 
     private void Start()
     {
@@ -26,6 +32,16 @@ public class NpcController : MonoBehaviour
     public void Update()
     {
 
+        if (gameObject.transform.position.x >= GameObject.FindGameObjectWithTag("Player").transform.position.x)
+        {
+            //face left
+            transform.rotation = Quaternion.Euler(0, -180f, 0);
+        }
+        else
+        {
+            //face right
+            transform.rotation = Quaternion.Euler(0, 0, 0f);
+        }
     }
 
     public void InitNPC()
@@ -42,6 +58,34 @@ public class NpcController : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         currentHealth -= dmg;
+
+        // Hurt Anim
+        animator.SetTrigger("Hurt");
+        StartCoroutine(FlashRed());
+
+        if(currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    public IEnumerator FlashRed()
+    {
+        gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        gameObject.GetComponentInChildren<SpriteRenderer>().color = Color.white;
+    }
+
+    private void Die()
+    {
+
+        // Die Anim
+        animator.SetBool("IsDead", true);
+
+        //Disable enemy
+        this.enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+        Invoke("DestroyNPC", 1.0f);
     }
 
     public void DoDamage()
@@ -50,31 +94,6 @@ public class NpcController : MonoBehaviour
     }
 
     //mal nachschauen: how Boids work
-    public void OnTriggerEnter2D(Collider2D collision)
-    {
-
-        if(collision.CompareTag("NPC"))
-        {
-            if (collision.transform.position.y < gameObject.transform.position.y)
-            {
-                rigidbody.AddForce(Vector2.up * 100f);
-
-            }
-            else
-            {
-                rigidbody.AddForce(Vector2.down * 100f);
-            }
-            if (collision.transform.position.x < gameObject.transform.position.x)
-            {
-                rigidbody.AddForce(Vector2.right * 100f);
-            }
-            else
-            {
-                rigidbody.AddForce(Vector2.left * 100f);
-            }
-        }
-    }
-
 
     public void DestroyNPC()
     {
