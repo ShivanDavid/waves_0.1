@@ -10,7 +10,7 @@ public class PlayerCombat : MonoBehaviour
     public LayerMask enemyLayers;
 
     public float attackRange = 0.5f;
-    public int attackDamage = 5;
+    public int attackDamage;
 
     public float attackRate = 2f;
     float nextAttackTime = 0f;
@@ -41,7 +41,7 @@ public class PlayerCombat : MonoBehaviour
         // Damage then
         foreach(Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<NpcController>().TakeDamage(attackDamage);
+            enemy.GetComponentInParent<NpcController>().TakeDamage(attackDamage);
         }
     }
 

@@ -7,7 +7,6 @@ public class CharackterController : MonoBehaviour
     //Attributs
     public int maxHealth;
     public int currentHealth;
-    public int damage;
 
     // Movement
     private Rigidbody2D rigidbody;
@@ -72,6 +71,11 @@ public class CharackterController : MonoBehaviour
     public void TakeDamage(int dmg)
     {
         currentHealth -= dmg;
+
+        if (currentHealth <= 0)
+        {
+            DestroyPlayer();
+        }
     }
 
     public void DestroyPlayer()

@@ -1,17 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Pathfinding;
 public class NpcController : MonoBehaviour
 {
     public NPC npc;
-    public SpriteRenderer sprite;
 
     public Animator animator;
 
     public new Rigidbody2D rigidbody;
 
-    public GameObject target;
     private Vector2 movementDirection;
 
     private int currentHealth;
@@ -21,52 +19,72 @@ public class NpcController : MonoBehaviour
 
     public Transform enemyGFX;
 
+    public bool isHit;
+
     
 
     private void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         InitNPC();
+        
     }
 
     public void Update()
     {
 
-        if (gameObject.transform.position.x >= GameObject.FindGameObjectWithTag("Player").transform.position.x)
+        if (gameObject.transform.position.x >= GameObject.FindGameObjectWithTag("Player").transform.position.x && !isHit)
         {
             //face left
             transform.rotation = Quaternion.Euler(0, -180f, 0);
         }
-        else
+        else if(gameObject.transform.position.x <= GameObject.FindGameObjectWithTag("Player").transform.position.x && !isHit)
         {
             //face right
             transform.rotation = Quaternion.Euler(0, 0, 0f);
         }
     }
 
+    public void Move()
+    {
+        animator.SetBool("Run", true);
+
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Attack"))
+        {
+            gameObject.GetComponent<AIPath>().enabled = true;
+        }
+    }
+
+
+
     public void InitNPC()
     {
-        this.sprite = npc.sprite;
         this.maxHealth = npc.maxHealth;
         this.currentHealth = npc.maxHealth;
         this.damage = npc.damage;
         this.level = npc.level;
 
-        target = null;
     }
 
     public void TakeDamage(int dmg)
     {
         currentHealth -= dmg;
+        isHit = true;
 
         // Hurt Anim
         animator.SetTrigger("Hurt");
         StartCoroutine(FlashRed());
+        Invoke(nameof(WaitForAnimation), 1.0f);
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
+    }
+
+    public void WaitForAnimation()
+    {
+        isHit = false;
     }
 
     public IEnumerator FlashRed()
@@ -84,13 +102,8 @@ public class NpcController : MonoBehaviour
 
         //Disable enemy
         this.enabled = false;
-        GetComponent<Collider2D>().enabled = false;
-        Invoke("DestroyNPC", 1.0f);
-    }
-
-    public void DoDamage()
-    {
-        target.GetComponent<CharackterController>().currentHealth -=  this.damage;
+        GetComponent<AIPath>().enabled = false;
+        Invoke(nameof(DestroyNPC), 1.0f);
     }
 
     //mal nachschauen: how Boids work

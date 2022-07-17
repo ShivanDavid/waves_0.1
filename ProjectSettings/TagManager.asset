@@ -7,6 +7,7 @@ TagManager:
   - Stone
   - NPC
   - PlayerAttackPoint
+  - BlubGFX
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - GameLevel
   - NPC
   - Enemies
-  - 
+  - Player
   - 
   - 
   - 
