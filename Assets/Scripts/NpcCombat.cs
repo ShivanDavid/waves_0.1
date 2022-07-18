@@ -39,9 +39,14 @@ public class NpcCombat : MonoBehaviour
 
     public void Update()
     {
-        if(inRange)
+        if(inRange && gameObject.transform.rotation.y == 180f)
         {
             hit = Physics2D.Raycast(rayCast.position, Vector2.left, rayCastLength, rayCastMask);
+            RayCastDebugger();
+        }
+        else if(inRange && gameObject.transform.rotation.y == 0f)
+        {
+            hit = Physics2D.Raycast(rayCast.position, Vector2.right, rayCastLength, rayCastMask);
             RayCastDebugger();
         }
 
