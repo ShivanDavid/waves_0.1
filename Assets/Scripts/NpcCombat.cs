@@ -30,6 +30,8 @@ public class NpcCombat : MonoBehaviour
     public GameObject enemyCollider;
     public GameObject rayCastObj;
 
+    public Collider2D a;
+
     public void Awake()
     {
         intTimer = timer;
@@ -39,14 +41,27 @@ public class NpcCombat : MonoBehaviour
 
     public void Update()
     {
-        if(inRange && gameObject.transform.rotation.y == 180f)
+
+
+        //If the left mouse button is clicked.
+        if (Input.GetMouseButtonDown(0))
         {
-            hit = Physics2D.Raycast(rayCast.position, Vector2.left, rayCastLength, rayCastMask);
-            RayCastDebugger();
+
+            //Get the mouse position on the screen and send a raycast into the game world from that position.
+            Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(worldPoint, Vector2.zero);
+
+            //If something was hit, the RaycastHit2D.collider will not be null.
+            if (hit.collider != null)
+            {
+                Debug.Log(hit.collider.name);
+            }
         }
-        else if(inRange && gameObject.transform.rotation.y == 0f)
+
+        if (inRange)
         {
             hit = Physics2D.Raycast(rayCast.position, Vector2.right, rayCastLength, rayCastMask);
+            a = hit.collider;
             RayCastDebugger();
         }
 
@@ -57,6 +72,7 @@ public class NpcCombat : MonoBehaviour
         else if(hit.collider == null)
         {
             inRange = false;
+            a = null;
         }
 
         if(inRange == false)
