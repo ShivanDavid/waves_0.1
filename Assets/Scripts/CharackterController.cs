@@ -53,12 +53,12 @@ public class CharackterController : MonoBehaviour
         if (Input.GetAxisRaw("Horizontal") > 0)
         {
             //rechts
-            transform.rotation = Quaternion.Euler(0f, -180f, 0f);
+            transform.rotation = Quaternion.Euler(0f, 0, 0f);
         }
         else if (Input.GetAxisRaw("Horizontal") < 0)
         {
             //links
-            transform.rotation = Quaternion.Euler(0f, 0, 0f);
+            transform.rotation = Quaternion.Euler(0f, -180f, 0f);
         }
     }
 
