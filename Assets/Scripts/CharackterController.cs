@@ -29,7 +29,7 @@ public class CharackterController : MonoBehaviour
 
     public void Update()
     {
-        Move();
+        
         InitPlayer();
     }
 
@@ -64,6 +64,7 @@ public class CharackterController : MonoBehaviour
 
     public void FixedUpdate()
     {
+        Move();
         // Delta Time = Time Since Last Function Call => Movement Not Affected By Function Interval
         rigidbody.MovePosition(rigidbody.position + Time.fixedDeltaTime * movementSpeed * movementDirection);
     }
