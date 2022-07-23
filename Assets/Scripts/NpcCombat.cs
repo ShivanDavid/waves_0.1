@@ -97,7 +97,7 @@ public class NpcCombat : MonoBehaviour
         attackMode = true;
 
         if (target != null)
-            target.GetComponent<CharackterController>().TakeDamage(target.GetComponent<PlayerCombat>().attackDamage);
+            target.GetComponent<AgentNeoSmooth>().TakeDamage(target.GetComponent<PlayerCombat>().attackDamage);
 
         gameObject.GetComponent<Animator>().SetBool("Run", false);
         gameObject.GetComponent<Animator>().SetBool("Attack", true);
@@ -105,10 +105,10 @@ public class NpcCombat : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponentInParent<CharackterController>().CompareTag("Player"))
+        if (collision.gameObject.GetComponentInParent<AgentNeoSmooth>().CompareTag("Player"))
         {
 
-            target = collision.gameObject.GetComponentInParent<CharackterController>().gameObject;
+            target = collision.gameObject.GetComponentInParent<AgentNeoSmooth>().gameObject;
             inRange = true;
         }
     }

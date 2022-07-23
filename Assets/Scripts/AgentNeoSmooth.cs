@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CharackterController : MonoBehaviour
+public class AgentNeoSmooth : MonoBehaviour
 {
     //Sprite
-    public GameObject playerSprite;
-
+    public GameObject agentSprite;
 
     //Attributs
     public int maxHealth;
@@ -24,24 +23,15 @@ public class CharackterController : MonoBehaviour
     private readonly int isMoving = Animator.StringToHash("isMoving");
     private readonly int isAttacking = Animator.StringToHash("isAttacking");
 
-    [SerializeField]
-    private InputActionReference movement, attack, pointerPosition;
 
     private Vector2 pointerInput, movementInput;
 
     private WeaponParent weaponParent;
 
-    private void OnEnable()
-    {
-        attack.action.performed += PerformAttack;
-    }
+    public Vector2 PointerInput { get => pointerInput; set => pointerInput = value; }
+    public Vector2 MovementInput { get => movementInput; set => movementInput = value; }
 
-    private void OnDisable()
-    {
-        attack.action.performed -= PerformAttack;
-    }
-
-    private void PerformAttack(InputAction.CallbackContext obj)
+    public void PerformAttack()
     {
         weaponParent.Attack();
     }
@@ -61,7 +51,7 @@ public class CharackterController : MonoBehaviour
 
     public void FixedUpdate()
     {
-        pointerInput = GetPointerPosition();
+        //pointerInput = GetPointerPosition();
         weaponParent.PointerPosition = pointerInput;
 
         Move();
@@ -93,7 +83,7 @@ public class CharackterController : MonoBehaviour
         }
 
         // Toggle Movement Animation
-        playerSprite.GetComponent<Animator>().SetBool(isMoving, movementDirection != Vector2.zero);
+        agentSprite.GetComponent<Animator>().SetBool(isMoving, movementDirection != Vector2.zero);
     }
 
     private void Move()
@@ -101,19 +91,13 @@ public class CharackterController : MonoBehaviour
         //movementDirection.x = Input.GetAxisRaw("Horizontal");
         //movementDirection.y = Input.GetAxisRaw("Vertical");
 
-        movementDirection.x = movement.action.ReadValue<Vector2>().x;
-        movementDirection.y = movement.action.ReadValue<Vector2>().y;
+        //movementDirection.x = movement.action.ReadValue<Vector2>().x;
+        //movementDirection.y = movement.action.ReadValue<Vector2>().y;
 
         // Normalized => Equal Velocity In All Directions
         movementDirection = movementDirection.normalized;
     }
 
-    private Vector2 GetPointerPosition()
-    {
-        Vector3 mousePos = pointerPosition.action.ReadValue<Vector2>();
-        mousePos.z = Camera.main.nearClipPlane;
-        return Camera.main.ScreenToWorldPoint(mousePos);
-    }
 
     public void TakeDamage(int dmg)
     {

@@ -8,6 +8,7 @@ TagManager:
   - NPC
   - PlayerAttackPoint
   - BlubGFX
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -17,9 +18,9 @@ TagManager:
   - UI
   - GameLevel
   - NPC
-  - Enemies
+  - Enemy
   - Player
-  - 
+  - PlayerFeetCollider
   - 
   - 
   - 
