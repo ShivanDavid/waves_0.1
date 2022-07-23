@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,10 @@ using UnityEngine.InputSystem;
 
 public class CharackterController : MonoBehaviour
 {
+    //Sprite
+    public GameObject playerSprite;
+
+
     //Attributs
     public int maxHealth;
     public int currentHealth;
@@ -19,14 +24,27 @@ public class CharackterController : MonoBehaviour
     private readonly int isMoving = Animator.StringToHash("isMoving");
     private readonly int isAttacking = Animator.StringToHash("isAttacking");
 
-    private SpriteRenderer renderer;
-
     [SerializeField]
-    private InputActionReference movement, shoot, pointerPosition;
+    private InputActionReference movement, attack, pointerPosition;
 
     private Vector2 pointerInput, movementInput;
 
     private WeaponParent weaponParent;
+
+    private void OnEnable()
+    {
+        attack.action.performed += PerformAttack;
+    }
+
+    private void OnDisable()
+    {
+        attack.action.performed -= PerformAttack;
+    }
+
+    private void PerformAttack(InputAction.CallbackContext obj)
+    {
+        weaponParent.Attack();
+    }
 
     private void Awake()
     {
@@ -37,7 +55,6 @@ public class CharackterController : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        renderer = GetComponent<SpriteRenderer>();
 
         currentHealth = maxHealth;
     }
@@ -49,8 +66,6 @@ public class CharackterController : MonoBehaviour
 
         Move();
         AnimateCharacter();
-
-
 
         // Delta Time = Time Since Last Function Call => Movement Not Affected By Function Interval
         rigidbody.MovePosition(rigidbody.position + Time.fixedDeltaTime * movementSpeed * movementDirection);
@@ -78,7 +93,7 @@ public class CharackterController : MonoBehaviour
         }
 
         // Toggle Movement Animation
-        animator.SetBool(isMoving, movementDirection != Vector2.zero);
+        playerSprite.GetComponent<Animator>().SetBool(isMoving, movementDirection != Vector2.zero);
     }
 
     private void Move()
