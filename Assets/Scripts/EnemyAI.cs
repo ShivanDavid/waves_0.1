@@ -20,7 +20,7 @@ public class EnemyAI : MonoBehaviour
 
     private void Update()
     {
-        if (player == null)
+        if (player == null || player.GetComponent<Health>().isDead)
         {
             OnMovementInput?.Invoke(Vector2.zero);
             return;

@@ -11,7 +11,14 @@ public class Health : MonoBehaviour
     public UnityEvent<GameObject> OnHitWithReference, OnDeathWithReference;
 
     [SerializeField]
-    private bool isDead = false;
+    public bool isDead = false;
+
+    private AgentAnimations agentAnimations;
+
+    private void Awake()
+    {
+        agentAnimations = GetComponentInChildren<AgentAnimations>();
+    }
 
     public void InitializeHealth(int healthValue)
     {
@@ -38,7 +45,7 @@ public class Health : MonoBehaviour
         {
             OnDeathWithReference?.Invoke(sender);
             isDead = true;
-            Destroy(gameObject);
+            agentAnimations.DieAnimation(isDead);
         }
     }
 

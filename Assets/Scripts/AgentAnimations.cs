@@ -30,4 +30,9 @@ public class AgentAnimations : MonoBehaviour
         animator.SetBool("isRunning", movementInput.magnitude > 0);
 
     }
+
+    public void DieAnimation(bool isDead)
+    {
+        animator.SetBool("isDead", isDead);
+    }
 }

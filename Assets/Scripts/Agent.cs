@@ -21,9 +21,18 @@ public class Agent : MonoBehaviour
         //pointerInput = GetPointerInput();
         //movementInput = movement.action.ReadValue<Vector2>().normalized;
 
-        agentMover.MovementInput = MovementInput;
-        weaponParent.PointerPosition = pointerInput;
-        AnimateCharacter();
+        if(gameObject.GetComponent<Health>().isDead)
+        {
+            MovementInput = new Vector2(0f,0f);
+            agentMover.MovementInput = MovementInput;
+            return;
+        }
+        else
+        {
+            agentMover.MovementInput = MovementInput;
+            weaponParent.PointerPosition = pointerInput;
+            AnimateCharacter();
+        }
     }
 
     public void PerformAttack()
