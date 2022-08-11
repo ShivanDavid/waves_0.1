@@ -8,12 +8,19 @@ public class Health : MonoBehaviour
     [SerializeField]
     private int currentHealth, maxHealth;
 
+    public Healthbar healthbar;
+
     public UnityEvent<GameObject> OnHitWithReference, OnDeathWithReference;
 
     [SerializeField]
     public bool isDead = false;
 
     private AgentAnimations agentAnimations;
+
+    public void Start()
+    {
+        InitializeHealth(maxHealth);
+    }
 
     private void Awake()
     {
@@ -24,6 +31,9 @@ public class Health : MonoBehaviour
     {
         currentHealth = healthValue;
         maxHealth = healthValue;
+
+        healthbar.SetMaxHealth(maxHealth);
+
         isDead = false;
     }
 
@@ -35,6 +45,7 @@ public class Health : MonoBehaviour
             return;
 
         currentHealth -= amount;
+        healthbar.SetHealth(currentHealth);
         StartCoroutine(Flash());
 
         if (currentHealth > 0)
