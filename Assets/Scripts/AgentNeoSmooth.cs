@@ -14,7 +14,7 @@ public class AgentNeoSmooth : MonoBehaviour
     public int currentHealth;
 
     // Movement
-    private Rigidbody2D rigidbody;
+    private Rigidbody2D _rigidbody;
     private Vector2 movementDirection;
     public float movementSpeed;
 
@@ -43,7 +43,7 @@ public class AgentNeoSmooth : MonoBehaviour
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
         currentHealth = maxHealth;
@@ -58,7 +58,7 @@ public class AgentNeoSmooth : MonoBehaviour
         AnimateCharacter();
 
         // Delta Time = Time Since Last Function Call => Movement Not Affected By Function Interval
-        rigidbody.MovePosition(rigidbody.position + Time.fixedDeltaTime * movementSpeed * movementDirection);
+        _rigidbody.MovePosition(_rigidbody.position + Time.fixedDeltaTime * movementSpeed * movementDirection);
 
         //if (Input.GetMouseButtonDown(0))
         //{

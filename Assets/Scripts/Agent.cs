@@ -11,7 +11,7 @@ public class Agent : MonoBehaviour
 
     private WeaponParent weaponParent;
 
-    private Vector2 pointerInput, movementInput;
+    private Vector2 pointerInput, movementInput, lookDirection;
 
     public Vector2 PointerInput { get => pointerInput; set => pointerInput = value; }
     public Vector2 MovementInput { get => movementInput; set => movementInput = value; }
@@ -49,9 +49,14 @@ public class Agent : MonoBehaviour
 
     private void AnimateCharacter()
     {
-        Vector2 lookDirection = pointerInput - (Vector2)transform.position;
+        lookDirection = pointerInput - (Vector2)transform.position;
         agentAnimations.RotateToPointer(lookDirection);
         agentAnimations.PlayAnimation(MovementInput);
+    }
+
+    public Vector2 GetLookDirection()
+    {
+        return this.lookDirection;
     }
 
     

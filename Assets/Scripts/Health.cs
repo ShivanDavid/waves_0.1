@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
+    public Transform pfDamagePopUp;
+
     [SerializeField]
     private int currentHealth, maxHealth;
 
@@ -44,7 +47,21 @@ public class Health : MonoBehaviour
         if (sender.layer == gameObject.layer)
             return;
 
-        currentHealth -= amount;
+        //DamagePopUp
+        Vector2 lookDirection = gameObject.GetComponent<Agent>().GetLookDirection();
+        amount = Random.Range(1, amount);
+        bool isCriticalHit = Random.Range(0, 100) < 30;
+        if(isCriticalHit)
+        {
+            amount *= 2;
+        }
+        currentHealth -= amount; //DamageAmount on Object
+        if (!gameObject.CompareTag("Player"))
+        {
+            DamagePopUp.Create(healthbar.transform.position, amount, pfDamagePopUp, isCriticalHit, lookDirection);
+        }
+
+
         healthbar.SetHealth(currentHealth);
         StartCoroutine(Flash());
 

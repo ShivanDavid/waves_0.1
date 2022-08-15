@@ -194,6 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58cba2994ac508429af0cf06c1271bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageAmount: 3
   characterRenderer: {fileID: 1112711918255584755}
   weaponRenderer: {fileID: 1112711919166481953}
   animator: {fileID: 1112711919166481952}
@@ -443,6 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b548c95b0040eeb40b6489187a2875d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pfDamagePopUp: {fileID: 6538419923024619549, guid: 41a4aee3d8062c04a9a4441fe530db3a, type: 3}
   currentHealth: 3
   maxHealth: 3
   healthbar: {fileID: 8329254261136011358}
