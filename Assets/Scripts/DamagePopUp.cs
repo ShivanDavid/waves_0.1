@@ -29,7 +29,7 @@ public class DamagePopUp : MonoBehaviour
     private void Update()
     {
         transform.position += moveVector * Time.deltaTime;
-        moveVector -= moveVector * 2f * Time.deltaTime;
+        moveVector -= moveVector * 5f * Time.deltaTime;
 
         if(disappearTimer > DISAPPEAR_TIME_MAX * 0.5f)
         {
@@ -62,8 +62,8 @@ public class DamagePopUp : MonoBehaviour
         if(!isCriticalHit)
         {
             textMesh.fontSize = 2;
-            Color c = new(255, 168, 0);
-            textColor = c;       
+            //Color c = new(255, 168, 0);
+            textColor = Color.white;       
         }
         else
         {

@@ -50,8 +50,8 @@ public class Health : MonoBehaviour
         //DamagePopUp
         Vector2 lookDirection = gameObject.GetComponent<Agent>().GetLookDirection();
         amount = Random.Range(1, amount);
-        bool isCriticalHit = Random.Range(0, 100) < 30;
-        if(isCriticalHit)
+        bool isCriticalHit = Random.Range(0, amount) > (amount / 2);
+        if (isCriticalHit)
         {
             amount *= 2;
         }
