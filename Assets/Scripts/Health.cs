@@ -61,7 +61,6 @@ public class Health : MonoBehaviour
             DamagePopUp.Create(healthbar.transform.position, amount, pfDamagePopUp, isCriticalHit, lookDirection);
         }
 
-
         healthbar.SetHealth(currentHealth);
         StartCoroutine(Flash());
 
