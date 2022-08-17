@@ -56,7 +56,11 @@ public class Health : MonoBehaviour
             amount *= 2;
         }
         currentHealth -= amount; //DamageAmount on Object
-        if (!gameObject.CompareTag("Player"))
+        if (gameObject.CompareTag("Enemy"))
+        {
+            DamagePopUp.Create(healthbar.transform.position, amount, pfDamagePopUp, isCriticalHit, lookDirection);
+        }
+        else if (gameObject.CompareTag("Player"))
         {
             DamagePopUp.Create(healthbar.transform.position, amount, pfDamagePopUp, isCriticalHit, lookDirection);
         }

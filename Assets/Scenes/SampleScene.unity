@@ -2646,7 +2646,7 @@ GameObject:
   - component: {fileID: 393908557}
   - component: {fileID: 393908556}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: GameTesting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2665,6 +2665,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pfDamagePopUp: {fileID: 6538419923024619549, guid: 41a4aee3d8062c04a9a4441fe530db3a, type: 3}
+  parent: {fileID: 974630748}
+  obj: {fileID: 7375359375104130878, guid: 808bcbf6c60a9d344b2d2405b5bb1cda, type: 3}
 --- !u!4 &393908557
 Transform:
   m_ObjectHideFlags: 0
@@ -99879,7 +99881,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b548c95b0040eeb40b6489187a2875d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pfDamagePopUp: {fileID: 6538419923024619549, guid: 41a4aee3d8062c04a9a4441fe530db3a, type: 3}
+  pfDamagePopUp: {fileID: 6538419923024619549, guid: 0c00bd3c250843d438a9c211ae1f966b, type: 3}
   currentHealth: 10
   maxHealth: 1000
   healthbar: {fileID: 974630751}
@@ -107676,7 +107678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b548c95b0040eeb40b6489187a2875d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pfDamagePopUp: {fileID: 6538419923024619549, guid: 41a4aee3d8062c04a9a4441fe530db3a, type: 3}
+  pfDamagePopUp: {fileID: 6538419923024619549, guid: 0c00bd3c250843d438a9c211ae1f966b, type: 3}
   currentHealth: 30
   maxHealth: 100
   healthbar: {fileID: 31998863}

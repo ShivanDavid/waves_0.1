@@ -10,7 +10,13 @@ public class DamagePopUp : MonoBehaviour
     public static DamagePopUp Create(Vector3 position, int damageAmount, Transform pfDamagePopUp, bool isCriticalHit, Vector2 lookDirection)
     {
         Transform damagePopUpTransform = Instantiate(pfDamagePopUp, position, Quaternion.identity);
+
+        //GameObject initObject = Instantiate(obj, parent.transform.position, Quaternion.identity);
+        //initObject.transform.SetParent(parent.transform);
+
         DamagePopUp damagePopUp = damagePopUpTransform.GetComponent<DamagePopUp>();
+       
+
         damagePopUp.Setup(damageAmount, isCriticalHit, lookDirection);
 
         return damagePopUp;
@@ -71,6 +77,8 @@ public class DamagePopUp : MonoBehaviour
             textColor = Color.red;
         }
 
+        Debug.Log(textMesh.name);
+
         textMesh.color = textColor;
         disappearTimer = DISAPPEAR_TIME_MAX;
 
@@ -79,4 +87,8 @@ public class DamagePopUp : MonoBehaviour
 
         moveVector = -lookDirection * 3f;
     }
+
+   
+
+
 }
