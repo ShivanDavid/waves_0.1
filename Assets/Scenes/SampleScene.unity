@@ -107454,7 +107454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 10
-  critbonus: 100
+  critbonus: 10
   characterRenderer: {fileID: 8999969995449714210}
   weaponRenderer: {fileID: 8999969993978353136}
   animator: {fileID: 8999969993978353137}

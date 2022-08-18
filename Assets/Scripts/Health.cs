@@ -43,19 +43,23 @@ public class Health : MonoBehaviour
         isDead = false;
     }
 
-    public void GetHit(int amount, GameObject sender, int critBonus)
+    public void GetHit(int amountMax, GameObject sender, int critBonus)
     {
         if (isDead)
             return;
         if (sender.layer == gameObject.layer)
             return;
 
-        //DamagePopUp
+        //for DamagePopUp
         Vector2 lookDirection = gameObject.GetComponent<Agent>().GetLookDirection();
-        amount = Random.Range(1, amount);
-        bool isCriticalHit = Random.Range(0, amount + critBonus)  > (amount / 2);
-        if (isCriticalHit)
+
+        int halfAmount = amountMax / 2;
+
+        int amount = Random.Range(1, amountMax);
+        bool isCriticalHit = Random.Range(0, amount + critBonus)  >= halfAmount && (amount > halfAmount);
+        if (isCriticalHit )
         {
+            Debug.Log(amount);
             amount *= 2;
         }
         currentHealth -= amount; //DamageAmount on Object
