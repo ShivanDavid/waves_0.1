@@ -9,6 +9,9 @@ TagManager:
   - PlayerAttackPoint
   - BlubGFX
   - Enemy
+  - DmgPopUpPlayer
+  - pfDamagePopUp
+  - PlayerCanvas
   layers:
   - Default
   - TransparentFX

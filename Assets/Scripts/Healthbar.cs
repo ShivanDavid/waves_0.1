@@ -6,22 +6,11 @@ using TMPro;
 
 public class Healthbar : MonoBehaviour
 {
-
     public Slider slider;
     public Gradient gradient;
     public Image fill;
 
     public TMP_Text text;
-
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
 
     public void SetMaxHealth(int health)
     {

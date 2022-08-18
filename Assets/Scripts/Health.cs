@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class Health : MonoBehaviour
 {
     public Transform pfDamagePopUp;
+    public TMP_Text dmgPopUpPlayer;
 
     [SerializeField]
     private int currentHealth, maxHealth;
@@ -62,7 +63,7 @@ public class Health : MonoBehaviour
         }
         else if (gameObject.CompareTag("Player"))
         {
-            DamagePopUp.Create(healthbar.transform.position, amount, pfDamagePopUp, isCriticalHit, lookDirection);
+            DamagePopUp.CreateForPlayer(healthbar.transform.position, amount, dmgPopUpPlayer, isCriticalHit, lookDirection);
         }
 
         healthbar.SetHealth(currentHealth);
@@ -78,6 +79,22 @@ public class Health : MonoBehaviour
             isDead = true;
             agentAnimations.DieAnimation(isDead);
         }
+
+        ////Debug.Log(GameObject.FindGameObjectWithTag("pfDamagePopUp").GetComponent<DamagePopUp>().GetDmgAmount().ToString());
+        //if(dmgPopUpPlayer)
+        //{
+        //    Debug.Log("nice");
+
+        //    string dmgAmount = GameObject.FindGameObjectWithTag("pfDamagePopUp").
+        //        GetComponent<DamagePopUp>().GetDmgAmount().ToString();
+
+        //    dmgPopUpPlayer.SetText("-" + dmgAmount);
+        //}
+        //else
+        //{
+        //    Debug.Log("wrong");
+        //}
+        
     }
 
     private IEnumerator Flash()

@@ -339,7 +339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &31998862
 RectTransform:
   m_ObjectHideFlags: 0
@@ -447,7 +447,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 517551874}
   m_HandleRect: {fileID: 0}
@@ -3282,7 +3282,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0.11000061, y: 0}
   m_SizeDelta: {x: 9.05, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -96908,6 +96908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pfDamagePopUp: {fileID: 6538419923024619549, guid: 41a4aee3d8062c04a9a4441fe530db3a, type: 3}
+  dmgPopUpPlayer: {fileID: 0}
   currentHealth: 30
   maxHealth: 100
   healthbar: {fileID: 991825048}
@@ -97263,7 +97264,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 275854106}
   m_HandleRect: {fileID: 0}
@@ -99882,6 +99883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pfDamagePopUp: {fileID: 6538419923024619549, guid: 0c00bd3c250843d438a9c211ae1f966b, type: 3}
+  dmgPopUpPlayer: {fileID: 4708322310037689933, guid: 869be9c846fe5ce45bae4ef6416b121b, type: 3}
   currentHealth: 10
   maxHealth: 1000
   healthbar: {fileID: 974630751}
@@ -104646,7 +104648,7 @@ GameObject:
   - component: {fileID: 1847102090}
   m_Layer: 5
   m_Name: Canvas
-  m_TagString: Untagged
+  m_TagString: PlayerCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107449,7 +107451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f58cba2994ac508429af0cf06c1271bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 3
+  damageAmount: 10
   characterRenderer: {fileID: 8999969995449714210}
   weaponRenderer: {fileID: 8999969993978353136}
   animator: {fileID: 8999969993978353137}
@@ -107679,6 +107681,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pfDamagePopUp: {fileID: 6538419923024619549, guid: 0c00bd3c250843d438a9c211ae1f966b, type: 3}
+  dmgPopUpPlayer: {fileID: 0}
   currentHealth: 30
   maxHealth: 100
   healthbar: {fileID: 31998863}
