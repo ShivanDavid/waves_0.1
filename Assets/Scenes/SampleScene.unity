@@ -3052,6 +3052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 3
+  critbonus: 0
   characterRenderer: {fileID: 820075730}
   weaponRenderer: {fileID: 704752954}
   animator: {fileID: 704752953}
@@ -106730,6 +106731,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 5
+  critbonus: 0
   characterRenderer: {fileID: 156828476}
   weaponRenderer: {fileID: 2129416430}
   animator: {fileID: 2129416431}
@@ -107452,6 +107454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageAmount: 10
+  critbonus: 100
   characterRenderer: {fileID: 8999969995449714210}
   weaponRenderer: {fileID: 8999969993978353136}
   animator: {fileID: 8999969993978353137}

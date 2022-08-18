@@ -6,6 +6,7 @@ using UnityEngine;
 public class WeaponParent : MonoBehaviour
 {
     public int damageAmount;
+    public int critbonus;
 
     public SpriteRenderer characterRenderer, weaponRenderer;
 
@@ -87,7 +88,7 @@ public class WeaponParent : MonoBehaviour
             Health health;
             if(health = collider.GetComponent<Health>())
             {
-                health.GetHit(damageAmount, transform.parent.gameObject);
+                health.GetHit(damageAmount, transform.parent.gameObject, critbonus);
             }
         }
     }

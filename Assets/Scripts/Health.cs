@@ -9,6 +9,8 @@ public class Health : MonoBehaviour
     public Transform pfDamagePopUp;
     public TMP_Text dmgPopUpPlayer;
 
+    //public int critBonus; //critbonus für den der angreift
+
     [SerializeField]
     private int currentHealth, maxHealth;
 
@@ -41,7 +43,7 @@ public class Health : MonoBehaviour
         isDead = false;
     }
 
-    public void GetHit(int amount, GameObject sender)
+    public void GetHit(int amount, GameObject sender, int critBonus)
     {
         if (isDead)
             return;
@@ -51,7 +53,7 @@ public class Health : MonoBehaviour
         //DamagePopUp
         Vector2 lookDirection = gameObject.GetComponent<Agent>().GetLookDirection();
         amount = Random.Range(1, amount);
-        bool isCriticalHit = Random.Range(0, amount) > (amount / 2);
+        bool isCriticalHit = Random.Range(0, amount + critBonus)  > (amount / 2);
         if (isCriticalHit)
         {
             amount *= 2;
