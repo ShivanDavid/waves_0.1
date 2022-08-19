@@ -43,34 +43,85 @@ public class Health : MonoBehaviour
         isDead = false;
     }
 
-    public void GetHit(int amountMax, GameObject sender, int critBonus)
+    public bool CritCalculater(int rawDmgAmount, int dmgAmountMax, int critBonus)
+    {
+        int halfAmount = dmgAmountMax / 2;
+
+        bool isCriticalHit = Random.Range(0, rawDmgAmount + critBonus) >= halfAmount && (rawDmgAmount > halfAmount);
+
+        return isCriticalHit;
+    }
+
+
+    public int DamageCalculater(bool isCriticalHit, int rawAmountMax)
+    {
+        if (isCriticalHit)
+        {
+            rawAmountMax *= 2;
+        }
+       
+        return rawAmountMax;
+    }
+
+    public void CreateDamagePopUps(int editDmgAmount, bool isCriticalHit)
+    {
+        Vector2 lookDirection = gameObject.GetComponent<Agent>().GetLookDirection();
+
+        if (gameObject.CompareTag("Enemy"))
+        {
+            DamagePopUp.Create(healthbar.transform.position, editDmgAmount, pfDamagePopUp, isCriticalHit, lookDirection);
+        }
+        else if (gameObject.CompareTag("Player"))
+        {
+            DamagePopUp.CreateForPlayer(healthbar.transform.position, editDmgAmount, dmgPopUpPlayer, isCriticalHit);
+        }
+        else
+        {
+            //DamagePopUp.Create(healthbar.transform.position, editDmgAmount, pfDamagePopUp, isCriticalHit, lookDirection);
+            Debug.Log("another npc");
+        }
+    }
+
+    public void GetHit(int dmgAmountMax, GameObject sender, int critBonus)
     {
         if (isDead)
             return;
         if (sender.layer == gameObject.layer)
             return;
 
-        //for DamagePopUp
-        Vector2 lookDirection = gameObject.GetComponent<Agent>().GetLookDirection();
+        //
+        int rawDmgAmount = Random.Range(1, dmgAmountMax);
 
-        int halfAmount = amountMax / 2;
+        //Dmg + crit calculation
+        bool isCriticalHit = CritCalculater(rawDmgAmount, dmgAmountMax, critBonus);
+        int editDmgAmount = DamageCalculater(isCriticalHit, rawDmgAmount);
+        
+        //
+        CreateDamagePopUps(editDmgAmount, isCriticalHit);
 
-        int amount = Random.Range(1, amountMax);
-        bool isCriticalHit = Random.Range(0, amount + critBonus)  >= halfAmount && (amount > halfAmount);
-        if (isCriticalHit )
-        {
-            Debug.Log(amount);
-            amount *= 2;
-        }
-        currentHealth -= amount; //DamageAmount on Object
-        if (gameObject.CompareTag("Enemy"))
-        {
-            DamagePopUp.Create(healthbar.transform.position, amount, pfDamagePopUp, isCriticalHit, lookDirection);
-        }
-        else if (gameObject.CompareTag("Player"))
-        {
-            DamagePopUp.CreateForPlayer(healthbar.transform.position, amount, dmgPopUpPlayer, isCriticalHit, lookDirection);
-        }
+        ////for DamagePopUp
+        //Vector2 lookDirection = gameObject.GetComponent<Agent>().GetLookDirection();
+
+        //int halfAmount = amountMax / 2;
+
+        //int amount = Random.Range(1, amountMax);
+        //bool isCriticalHit = Random.Range(0, amount + critBonus)  >= halfAmount && (amount > halfAmount);
+        //if (isCriticalHit )
+        //{
+        //    Debug.Log(amount);
+        //    amount *= 2;
+        //}
+        //currentHealth -= amount; //DamageAmount on Object
+        //if (gameObject.CompareTag("Enemy"))
+        //{
+        //    DamagePopUp.Create(healthbar.transform.position, amount, pfDamagePopUp, isCriticalHit, lookDirection);
+        //}
+        //else if (gameObject.CompareTag("Player"))
+        //{
+        //    DamagePopUp.CreateForPlayer(healthbar.transform.position, amount, dmgPopUpPlayer, isCriticalHit);
+        //}
+
+        currentHealth -= editDmgAmount; //DamageAmount on Object
 
         healthbar.SetHealth(currentHealth);
         StartCoroutine(Flash());

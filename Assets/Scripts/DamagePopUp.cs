@@ -23,7 +23,7 @@ public class DamagePopUp : MonoBehaviour
         return damagePopUp;
     }
 
-    public static DamagePopUp CreateForPlayer(Vector3 position, int damageAmount, TMP_Text pfDamagePopUp, bool isCriticalHit, Vector2 lookDirection)
+    public static DamagePopUp CreateForPlayer(Vector3 position, int damageAmount, TMP_Text pfDamagePopUp, bool isCriticalHit)
     {
         GameObject playerCanvas = GameObject.FindGameObjectWithTag("PlayerCanvas");
 
