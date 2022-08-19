@@ -72,6 +72,7 @@ public class DamagePopUp : MonoBehaviour
     private int dmgAmount;
 
 
+
     private void Awake()
     {
         textMesh = transform.GetComponent<TextMeshPro>();
@@ -80,15 +81,15 @@ public class DamagePopUp : MonoBehaviour
     {
         if(gameObject.CompareTag("DmgPopUpPlayer"))
         {
-            moveVector = new(122, 122, 122);
-            Destroy(gameObject, 1f);
-            transform.position += moveVector * Time.deltaTime;
+            moveVector = new(0.3f, 0, 0);
+            Destroy(gameObject, 0.8f);
+            transform.position += moveVector;
             moveVector -= moveVector * 5f * Time.deltaTime;
 
             if (disappearTimer > DISAPPEAR_TIME_MAX * 0.5f)
             {
-                float increaseScaleAmount = 2f;
-                transform.localScale += increaseScaleAmount * Time.deltaTime * Vector3.one * 55f;
+                float increaseScaleAmount = 0.5f;
+                transform.localScale += increaseScaleAmount * Time.deltaTime * Vector3.one;
             }
             else
             {
