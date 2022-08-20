@@ -23,15 +23,24 @@ public class DamagePopUp : MonoBehaviour
         return damagePopUp;
     }
 
-    public static DamagePopUp CreateForPlayer(Vector3 position, int damageAmount, TMP_Text pfDamagePopUp, bool isCriticalHit)
+    public static DamagePopUp CreateForPlayer(Vector3 position, int damageAmount, TMP_Text pfDamagePopUp, bool isCriticalHit, float factorEnemys)
     {
         GameObject playerCanvas = GameObject.FindGameObjectWithTag("PlayerCanvas");
 
         TMP_Text damagePopUpTMP = Instantiate(pfDamagePopUp, position, Quaternion.identity);
-        damagePopUpTMP.transform.SetParent(playerCanvas.transform);
+        damagePopUpTMP.rectTransform.SetParent(playerCanvas.transform);
+
+   
+
+        Debug.Log(damagePopUpTMP.transform.position);
+
+        damagePopUpTMP.rectTransform.position = new Vector3(damagePopUpTMP.transform.position.x, damagePopUpTMP.transform.position.y + factorEnemys, damagePopUpTMP.transform.position.z);
+
+        Debug.Log(factorEnemys);
+
+        Debug.Log(damagePopUpTMP.rectTransform.position);
 
         DamagePopUp damagePopUp = damagePopUpTMP.GetComponent<DamagePopUp>();
-
         damagePopUp.SetupForPlayer(damagePopUpTMP, damageAmount, isCriticalHit);
 
         //GameObject initObject = Instantiate(obj, parent.transform.position, Quaternion.identity);
@@ -46,10 +55,13 @@ public class DamagePopUp : MonoBehaviour
     {
         damagePopUpTMP.SetText("-" + damageAmount.ToString());
 
+        
+
         if (isCriticalHit)
         {
             damagePopUpTMP.fontSize = 42;
             damagePopUpTMP.color = Color.red;
+            damagePopUpTMP.geometrySortingOrder += 99;
         }
         else
         {
@@ -60,7 +72,7 @@ public class DamagePopUp : MonoBehaviour
         //damagePopUpTMP.color = textColor;
         //disappearTimer = DISAPPEAR_TIME_MAX;
 
-        sortingOrder++;
+        damagePopUpTMP.geometrySortingOrder++;
         damagePopUpTMP.geometrySortingOrder = (VertexSortingOrder)sortingOrder;
     }
 

@@ -9,6 +9,9 @@ public class Health : MonoBehaviour
     public Transform pfDamagePopUp;
     public TMP_Text dmgPopUpPlayer;
 
+    public int factor = -50;
+    bool execute = true;
+
     //public int critBonus; //critbonus für den der angreift
 
     [SerializeField]
@@ -67,13 +70,16 @@ public class Health : MonoBehaviour
     {
         Vector2 lookDirection = gameObject.GetComponent<Agent>().GetLookDirection();
 
+        factor = 0;
+        factor += Random.Range(-60, 60);
+
         if (gameObject.CompareTag("Enemy"))
         {
             DamagePopUp.Create(healthbar.transform.position, editDmgAmount, pfDamagePopUp, isCriticalHit, lookDirection);
         }
         else if (gameObject.CompareTag("Player"))
         {
-            DamagePopUp.CreateForPlayer(healthbar.transform.position, editDmgAmount, dmgPopUpPlayer, isCriticalHit);
+            DamagePopUp.CreateForPlayer(healthbar.transform.position, editDmgAmount, dmgPopUpPlayer, isCriticalHit, factor);
         }
         else
         {
